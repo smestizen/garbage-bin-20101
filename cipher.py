@@ -96,7 +96,7 @@ def encode_character(p, s):
     shift = ord(p.lower()) - ord('a')
     if s.isupper():
         return chr((ord(s) - ord('A') + shift) % 26 + ord('A'))
-    elif s.islower():
+    if s.islower():
         return chr((ord(s) - ord('a') + shift) % 26 + ord('a'))
     else:
         return s
@@ -111,7 +111,7 @@ def decode_character(p, s):
     shift = ord(p.lower()) - ord('a')
     if s.isupper():
         return chr((ord(s) - ord('A') - shift) % 26 + ord('A'))
-    elif s.islower():
+    if s.islower():
         return chr((ord(s) - ord('a') - shift) % 26 + ord('a'))
     else:
         return s
@@ -126,7 +126,7 @@ def vigenere_encode(string, phrase):
     filtered_phrase = filter_string(phrase)
     phrase_len = len(filtered_phrase)
     j = 0
-    for i, ch in enumerate(string):
+    for ch in enumerate(string):
         if ch.isalpha():
             p_char = filtered_phrase[j % phrase_len]
             encoded = encode_character(p_char.lower(), ch.lower())
@@ -148,7 +148,7 @@ def vigenere_decode(string, phrase):
     filtered_phrase = filter_string(phrase)
     phrase_len = len(filtered_phrase)
     j = 0
-    for i, ch in enumerate(string):
+    for ch in enumerate(string):
         if ch.isalpha():
             p_char = filtered_phrase[j % phrase_len]
             decoded = decode_character(p_char.lower(), ch.lower())
