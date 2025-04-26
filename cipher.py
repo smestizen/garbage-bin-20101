@@ -93,7 +93,13 @@ def encode_character(p, s):
     post: function returns a single character encoded using the
         Vigenere algorithm. You may not use a 2-D list
     """
-    return chr(((ord(s) - ord('a') + (ord(p) - ord('a'))) % 26) + ord('a'))
+    shift = ord(p.lower()) - ord('a')
+    if s.isupper():
+        return chr((ord(s) - ord('A') + shift) % 26 + ord('A'))
+    elif s.islower():
+        return chr((ord(s) - ord('a') + shift) % 26 + ord('a'))
+    else:
+        return s
 
 def decode_character(p, s):
     """
@@ -102,7 +108,13 @@ def decode_character(p, s):
     post: function returns a single character decoded using the
         Vigenere algorithm. You may not use a 2-D list
     """
-    return chr(((ord(s) - ord('a') - (ord(p) - ord('a'))) % 26) + ord('a'))
+    shift = ord(p.lower()) - ord('a')
+    if s.isupper():
+        return chr((ord(s) - ord('A') - shift) % 26 + ord('A'))
+    elif s.islower():
+        return chr((ord(s) - ord('a') - shift) % 26 + ord('a'))
+    else:
+        return s
 
 def vigenere_encode(string, phrase):
     """
@@ -110,10 +122,16 @@ def vigenere_encode(string, phrase):
     post: function returns a single string that is encoded with
         Vigenere algorithm
     """
-    result = ''
-    for i in range(len(string)):
-        result += encode_character(phrase[i % len(phrase)], string[i])
-    return result
+    result = []
+    phrase = [c for c in phrase if c.isalpha()]
+    j = 0
+    for i, ch in enumerate(string):
+        if ch.isalpha():
+            result.append(encode_character(phrase[j % len(phrase)], ch))
+            j += 1
+        else:
+            result.append(ch)
+    return ''.join(result)
 
 def vigenere_decode(string, phrase):
     """
@@ -121,10 +139,16 @@ def vigenere_decode(string, phrase):
     post: function returns a single string that is decoded with
         Vigenere algorithm
     """
-    result = ''
-    for i in range(len(string)):
-        result += decode_character(phrase[i % len(phrase)], string[i])
-    return result
+    result = []
+    phrase = [c for c in phrase if c.isalpha()]
+    j = 0
+    for i, ch in enumerate(string):
+        if ch.isalpha():
+            result.append(decode_character(phrase[j % len(phrase)], ch))
+            j += 1
+        else:
+            result.append(ch)
+    return ''.join(result)
 
 def main():
     """Main function that reads stdin and runs each cipher"""
