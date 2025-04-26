@@ -123,11 +123,16 @@ def vigenere_encode(string, phrase):
         Vigenere algorithm
     """
     result = []
-    phrase = [c for c in phrase if c.isalpha()]
+    filtered_phrase = filter_string(phrase)
+    phrase_len = len(filtered_phrase)
     j = 0
     for i, ch in enumerate(string):
         if ch.isalpha():
-            result.append(encode_character(phrase[j % len(phrase)], ch))
+            p_char = filtered_phrase[j % phrase_len]
+            encoded = encode_character(p_char.lower(), ch.lower())
+            if ch.isupper():
+                encoded = encoded.upper()
+            result.append(encoded)
             j += 1
         else:
             result.append(ch)
@@ -140,11 +145,16 @@ def vigenere_decode(string, phrase):
         Vigenere algorithm
     """
     result = []
-    phrase = [c for c in phrase if c.isalpha()]
+    filtered_phrase = filter_string(phrase)
+    phrase_len = len(filtered_phrase)
     j = 0
     for i, ch in enumerate(string):
         if ch.isalpha():
-            result.append(decode_character(phrase[j % len(phrase)], ch))
+            p_char = filtered_phrase[j % phrase_len]
+            decoded = decode_character(p_char.lower(), ch.lower())
+            if ch.isupper():
+                decoded = decoded.upper()
+            result.append(decoded)
             j += 1
         else:
             result.append(ch)
