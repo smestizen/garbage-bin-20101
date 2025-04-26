@@ -154,7 +154,7 @@ def main():
     cipher_text = input()
     key = int(input())
     print(f"Encoded Text: {cipher_text}")
-    print(f"Key: {key}")
+    print(f"Enter Key: {key}")
     print(f"Decoded Text: {rail_fence_decode(cipher_text, key)}")
     print()
     print("Vigenere Cipher")
