@@ -120,43 +120,26 @@ def vigenere_encode(string, phrase):
     post: function returns a single string that is encoded with
         Vigenere algorithm
     """
-    result = []
-    filtered_phrase = filter_string(phrase)
-    phrase_len = len(filtered_phrase)
-    j = 0
-    for ch in enumerate(string):
-        if ch.isalpha():
-            p_char = filtered_phrase[j % phrase_len]
-            encoded = encode_character(p_char.lower(), ch.lower())
-            if ch.isupper():
-                encoded = encoded.upper()
-            result.append(encoded)
-            j += 1
-        else:
-            result.append(ch)
-    return ''.join(result)
-
+    filteredstring = filter_string(string)
+    filteredphrase = filter_string(phrase)
+    encoded = ''
+    for idx, char in enumerate(filteredstring):
+        p_char = filteredphrase[idx % len(filteredphrase)]
+        encoded += encode_character(p_char, char)
+    return encoded
 def vigenere_decode(string, phrase):
     """
     pre: string is a string of characters and phrase is a pass phrase
     post: function returns a single string that is decoded with
         Vigenere algorithm
     """
-    result = []
-    filtered_phrase = filter_string(phrase)
-    phrase_len = len(filtered_phrase)
-    j = 0
-    for ch in enumerate(string):
-        if ch.isalpha():
-            p_char = filtered_phrase[j % phrase_len]
-            decoded = decode_character(p_char.lower(), ch.lower())
-            if ch.isupper():
-                decoded = decoded.upper()
-            result.append(decoded)
-            j += 1
-        else:
-            result.append(ch)
-    return ''.join(result)
+    filteredstring = filter_string(string)
+    filteredphrase = filter_string(phrase)
+    decoded = ''
+    for idx, char in enumerate(filteredstring):
+        p_char = filteredphrase[idx % len(filteredphrase)]
+        decoded += decode_character(p_char, char)
+    return decoded
 
 def main():
     """Main function that reads stdin and runs each cipher"""
