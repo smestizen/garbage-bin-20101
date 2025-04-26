@@ -144,6 +144,7 @@ def vigenere_decode(string, phrase):
 def main():
     """Main function that reads stdin and runs each cipher"""
     print("Rail Fence Cipher")
+    print()
     plain_text = input()
     key = int(input())
     print(f"Plain Text: {plain_text}")
@@ -157,6 +158,7 @@ def main():
     print(f"Decoded Text: {rail_fence_decode(cipher_text, key)}")
     print()
     print("Vigenere Cipher")
+    print()
     plain = input()
     phrase = input()
     filtered = filter_string(plain)
