@@ -98,8 +98,7 @@ def encode_character(p, s):
         return chr((ord(s) - ord('A') + shift) % 26 + ord('A'))
     if s.islower():
         return chr((ord(s) - ord('a') + shift) % 26 + ord('a'))
-    else:
-        return s
+    return s
 
 def decode_character(p, s):
     """
@@ -113,8 +112,7 @@ def decode_character(p, s):
         return chr((ord(s) - ord('A') - shift) % 26 + ord('A'))
     if s.islower():
         return chr((ord(s) - ord('a') - shift) % 26 + ord('a'))
-    else:
-        return s
+    return s
 
 def vigenere_encode(string, phrase):
     """
